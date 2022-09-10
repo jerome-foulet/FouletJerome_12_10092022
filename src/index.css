@@ -1,4 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+*,
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  --menu-background-color: #020203;
+  --primary-color: #000000;
+  --secondary-color: #ff0101;
+
+  font-family: "Roboto", sans-serif;
+  color: var(--primary-color);
+}
+
+.primary-color {
+  color: var(--primary-color);
+}
+
+.secondary-color {
+  color: var(--secondary-color);
+}
+
+header {
+  height: 91px;
+  width: 100%;
+  background-color: var(--menu-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+header img {
+  margin-left: 30px;
+}
+
+header nav {
+  width: 100%;
+}
+
+header ul {
+  color: white;
+  list-style: none;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 150px;
+  margin-right: 90px;
+}
+
+main {
+  display: flex;
+}
+
+.leftColumn {
+  min-width: 117px;
+  height: calc(100vh - 91px);
+  background-color: var(--menu-background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  color: white;
+  position: relative;
+}
+
+.leftColumn p {
+  transform: rotate(-90deg);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  width: 140px;
+  margin-bottom: 60px;
+  position: absolute;
+  bottom: 60px;
+}
+
+.leftColumn img {
+  width: 64px;
+  height: 64px;
+}
+
+.rightColumn {
+  padding-left: min(100px, 4%);
+  padding-right: min(90px, 4%);
+  padding-top: min(70px, 4%);
+  width: 100%;
+}
+
+.rightColumn h1 {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 24px;
+}
+
+.rightColumn p {
+  margin-top: 40px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.stats {
+  margin-top: min(75px, 4%);
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 30px;
+}
+
+.statsLeftColumn {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr;
+  gap: 30px;
+}
+
+.statsRightColumn {
+  display: grid;
+  align-content: space-between;
+}
+
+.statsCard {
+  background: #fbfbfb;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+  border-radius: 5px;
+}
+
+.statsCardRight {
+  height: 124px;
+  border: solid 1px green;
+}
+
+.dailyActivity {
+  height: 320px;
+  grid-column: 1 / 4;
+  grid-row: 1 / 1;
+}
+
+.averageTimeSession {
+  max-height: 263px;
+  min-height: 200px;
+  background: #ff0000;
+}
+
+.performance {
+  max-height: 263px;
+  min-height: 200px;
+  background: #282d30;
+}
+
+.score {
+  max-height: 263px;
+  min-height: 200px;
+  border: solid 1px black;
 }
