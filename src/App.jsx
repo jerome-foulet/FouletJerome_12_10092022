@@ -5,8 +5,14 @@ import yoga from "./assets/yoga.png";
 import swimming from "./assets/swimming.png";
 import bike from "./assets/bike.png";
 import bodybuilding from "./assets/bodybuilding.png";
+import caloriesIcon from "./assets/icon_calories.png";
+import proteinesIcon from "./assets/icon_proteines.png";
+import glucidesIcon from "./assets/icon_glucides.svg";
+import fatIcon from "./assets/icon_fat.svg";
 import { useEffect, useState } from "react";
 import getDatas from "./services/getDatas";
+import DailyActivity from "./components/dailyActivity";
+import CardUserData from "./components/cardUserData";
 
 function App() {
   // Use useSearchParams hook to get query parameters
@@ -50,10 +56,10 @@ function App() {
     get();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  //console.log(userDatas);
-  //console.log(activityDatas);
-  //console.log(averageSessionDatas);
-  //console.log(performanceDatas);
+  console.log(userDatas);
+  console.log(activityDatas);
+  console.log(averageSessionDatas);
+  console.log(performanceDatas);
 
   const firstName = userDatas.userInfos ? userDatas.userInfos.firstName : "";
 
@@ -89,16 +95,36 @@ function App() {
               <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
               <div className="stats">
                 <div className="statsLeftColumn">
-                  <article className="statsCard dailyActivity"></article>
+                  <DailyActivity activityDatas={activityDatas} />
                   <article className="statsCard averageTimeSession"></article>
                   <article className="statsCard performance"></article>
                   <article className="statsCard score"></article>
                 </div>
                 <div className="statsRightColumn">
-                  <article className="statsCard statsCardRight"></article>
-                  <article className="statsCard statsCardRight"></article>
-                  <article className="statsCard statsCardRight"></article>
-                  <article className="statsCard statsCardRight"></article>
+                  <CardUserData
+                    type="calories"
+                    quantity={userDatas.keyData.calorieCount}
+                  >
+                    {caloriesIcon}
+                  </CardUserData>
+                  <CardUserData
+                    type="proteines"
+                    quantity={userDatas.keyData.carbohydrateCount}
+                  >
+                    {proteinesIcon}
+                  </CardUserData>
+                  <CardUserData
+                    type="glucides"
+                    quantity={userDatas.keyData.calorieCount}
+                  >
+                    {glucidesIcon}
+                  </CardUserData>
+                  <CardUserData
+                    type="lipides"
+                    quantity={userDatas.keyData.lipidCount}
+                  >
+                    {fatIcon}
+                  </CardUserData>
                 </div>
               </div>
             </section>
