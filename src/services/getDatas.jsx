@@ -8,7 +8,6 @@ import { UserDatas } from "../models/UserDatas";
 import { ActivityDatas } from "../models/ActivityDatas";
 import { AverageSessionDatas } from "../models/AverageSessionDatas";
 import { PerformanceDatas } from "../models/PerfomanceDatas";
-import PropTypes from "prop-types";
 
 export default async function getDatas(userId, isMockedData) {
   let userDatas = {};
@@ -67,8 +66,3 @@ export default async function getDatas(userId, isMockedData) {
     new PerformanceDatas(performanceDatas).format(),
   ];
 }
-
-getDatas.proptype = {
-  userId: PropTypes.number.isRequired,
-  isMockedData: PropTypes.bool.isRequired,
-};

@@ -186,6 +186,7 @@ main {
   height: 320px;
   grid-column: 1 / 4;
   grid-row: 1 / 1;
+  position: relative;
 }
 
 .averageTimeSession {
@@ -204,4 +205,48 @@ main {
   max-height: 263px;
   min-height: 200px;
   border: solid 1px black;
+}
+
+/* Recharts */
+
+.dailyActivity h2 {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+  color: #20253a;
+}
+
+.customTooltip {
+  width: 39px;
+  height: 63px;
+  background-color: #e60000;
+  font-weight: 500;
+  font-size: 7px;
+  line-height: 24px;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.recharts-legend-item {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.recharts-legend-item > span {
+  color: #74798c !important;
+}
+
+.recharts-legend-item:first-child {
+  margin-right: 32px !important;
+}
+
+.recharts-legend-item > svg {
+  margin-right: 12px !important;
 }

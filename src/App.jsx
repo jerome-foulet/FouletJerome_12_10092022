@@ -18,7 +18,7 @@ function App() {
   // Use useSearchParams hook to get query parameters
   const [searchParams] = useSearchParams();
   // Get userId from query parameters and set it to 12 by default if not specified.
-  const [userId] = useState(parseInt(searchParams.get("userId")) ?? 12);
+  const [userId] = useState(parseInt(searchParams.get("userId") ?? "12"));
   // Get isMockedData from query parameters and set it to true by default - Only use true or false in query.
   const [isMockedData] = useState(
     !(searchParams.get("isMockedData") === "false")
@@ -100,7 +100,7 @@ function App() {
                   <article className="statsCard performance"></article>
                   <article className="statsCard score"></article>
                 </div>
-                <div className="statsRightColumn">
+                <aside className="statsRightColumn">
                   <CardUserData
                     type="calories"
                     quantity={userDatas.keyData.calorieCount}
@@ -125,7 +125,7 @@ function App() {
                   >
                     {fatIcon}
                   </CardUserData>
-                </div>
+                </aside>
               </div>
             </section>
           </>
