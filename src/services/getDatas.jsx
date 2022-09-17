@@ -15,14 +15,14 @@ export default async function getDatas(userId, isMockedData) {
   let performanceDatas = {};
   let averageSessionDatas = {};
   if (isMockedData) {
-    userDatas = USER_MAIN_DATA.filter((user) => user.id === userId)[0];
-    activityDatas = USER_ACTIVITY.filter(
+    userDatas = await USER_MAIN_DATA.filter((user) => user.id === userId)[0];
+    activityDatas = await USER_ACTIVITY.filter(
       (activity) => activity.userId === userId
     )[0];
-    averageSessionDatas = USER_AVERAGE_SESSIONS.filter(
+    averageSessionDatas = await USER_AVERAGE_SESSIONS.filter(
       (averageSession) => averageSession.userId === userId
     )[0];
-    performanceDatas = USER_PERFORMANCE.filter(
+    performanceDatas = await USER_PERFORMANCE.filter(
       (performance) => performance.userId === userId
     )[0];
     console.log("Mocked");
@@ -59,6 +59,7 @@ export default async function getDatas(userId, isMockedData) {
     performanceDatas = performanceDatasJson.data;
     console.log("API");
   }
+  performanceDatas.data.reverse();
   return [
     new UserDatas(userDatas).format(),
     new ActivityDatas(activityDatas).format(),

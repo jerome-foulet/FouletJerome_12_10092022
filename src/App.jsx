@@ -12,6 +12,9 @@ import fatIcon from "./assets/icon_fat.svg";
 import { useEffect, useState } from "react";
 import getDatas from "./services/getDatas";
 import DailyActivity from "./components/dailyActivity";
+import AverageSessionDuration from "./components/averageSessionDuration";
+import Performances from "./components/performances";
+import Score from "./components/score";
 import CardUserData from "./components/cardUserData";
 
 function App() {
@@ -25,7 +28,7 @@ function App() {
   );
   //console.log(typeof isMockedData);
   console.log("userId: %s", userId);
-  console.log("isMoackedData: %s", isMockedData.toString());
+  console.log("isMockedData: %s", isMockedData.toString());
 
   const [isDataLoading, setDataLoading] = useState(true);
   const [userDatas, setUserDatas] = useState({});
@@ -56,10 +59,10 @@ function App() {
     get();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(userDatas);
+  /* console.log(userDatas);
   console.log(activityDatas);
   console.log(averageSessionDatas);
-  console.log(performanceDatas);
+  console.log(performanceDatas); */
 
   const firstName = userDatas.userInfos ? userDatas.userInfos.firstName : "";
 
@@ -96,9 +99,11 @@ function App() {
               <div className="stats">
                 <div className="statsLeftColumn">
                   <DailyActivity activityDatas={activityDatas} />
-                  <article className="statsCard averageTimeSession"></article>
-                  <article className="statsCard performance"></article>
-                  <article className="statsCard score"></article>
+                  <AverageSessionDuration
+                    averageSessionDatas={averageSessionDatas}
+                  />
+                  <Performances performanceDatas={performanceDatas} />
+                  <Score userDatas={userDatas} />
                 </div>
                 <aside className="statsRightColumn">
                   <CardUserData

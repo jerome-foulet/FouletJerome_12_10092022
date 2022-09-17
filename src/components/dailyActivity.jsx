@@ -17,7 +17,7 @@ function DailyActivity({ activityDatas }) {
       return (
         <div className="customTooltip">
           <div>{`${payload[0].value}kg`}</div>
-          <div>{`${payload[1].value}Kcal`}</div>
+          <div>{`${payload[1].value}kCal`}</div>
         </div>
       );
     }

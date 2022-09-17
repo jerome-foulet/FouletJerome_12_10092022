@@ -5,6 +5,6 @@ export class UserDatas {
 
   format() {
     const { id, userInfos, todayScore, score, keyData } = this.userDatas;
-    return { id, userInfos, score: todayScore || score, keyData };
+    return { id, userInfos, score: (todayScore || score) * 100, keyData };
   }
 }
