@@ -1,5 +1,6 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+
 import logo from "./assets/logo.png";
 import yoga from "./assets/yoga.png";
 import swimming from "./assets/swimming.png";
@@ -9,7 +10,7 @@ import caloriesIcon from "./assets/icon_calories.png";
 import proteinesIcon from "./assets/icon_proteines.png";
 import glucidesIcon from "./assets/icon_glucides.svg";
 import fatIcon from "./assets/icon_fat.svg";
-import { useEffect, useState } from "react";
+
 import getDatas from "./services/getDatas";
 import DailyActivity from "./components/dailyActivity";
 import AverageSessionDuration from "./components/averageSessionDuration";

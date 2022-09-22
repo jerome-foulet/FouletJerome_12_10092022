@@ -51,7 +51,7 @@ function DailyActivity({ activityDatas }) {
           />
           <CartesianGrid
             stroke="#DEDEDE"
-            strokeDasharray="1 1"
+            strokeDasharray="2 2"
             vertical={false}
           />
           <XAxis
@@ -61,6 +61,7 @@ function DailyActivity({ activityDatas }) {
             tickLine={false}
             dy={15}
             tick={{ fill: "#9B9EAC", fontSize: 14 }}
+            stroke={"#DEDEDE"}
           />
           <YAxis
             yAxisId="kilogram"

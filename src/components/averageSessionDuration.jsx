@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Line,
   LineChart,
@@ -9,6 +10,13 @@ import {
 
 function AverageSessionDuration({ averageSessionDatas }) {
   const { sessions } = averageSessionDatas;
+  // Set 2 values at the ends for line continuity
+  let sessionsToEcho = [
+    { ...sessions.slice(-1)[0], tickDisplay: false },
+    ...sessions,
+    { ...sessions[0], tickDisplay: false },
+  ];
+  //console.log(sessionsToEcho);
 
   const formatTick = (value) => {
     const ticks = {
@@ -25,6 +33,7 @@ function AverageSessionDuration({ averageSessionDatas }) {
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
+      if (payload[0].payload.tickDisplay === false) return null;
       return <div className="customTooltip">{`${payload[0].value} min`}</div>;
     }
     return null;
@@ -35,8 +44,8 @@ function AverageSessionDuration({ averageSessionDatas }) {
       <h2>Durée moyenne des sessions</h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          data={sessions}
-          margin={{ left: 10, right: 10, top: 100, bottom: 15 }}
+          data={sessionsToEcho}
+          margin={{ left: -20, right: -20, top: 100, bottom: 15 }}
         >
           <Tooltip
             content={<CustomTooltip />}
@@ -58,7 +67,7 @@ function AverageSessionDuration({ averageSessionDatas }) {
             tick={{ fontSize: 12 }}
             tickFormatter={formatTick}
             dy={15}
-            interval={"preserveStartEnd"}
+            interval={0}
           />
           <YAxis hide={true} domain={["dataMin", "dataMax"]} />
         </LineChart>

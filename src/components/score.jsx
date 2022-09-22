@@ -1,7 +1,7 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 function Score({ userDatas }) {
-  //userDatas.score = 0.9;
+  //userDatas.score = 340;
   return (
     <article className="statsCard score">
       <h2>Score</h2>
@@ -13,7 +13,7 @@ function Score({ userDatas }) {
           objectif
         </div>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="80%">
         <PieChart>
           <Pie
             data={[userDatas]}
@@ -24,7 +24,7 @@ function Score({ userDatas }) {
             innerRadius={70}
             outerRadius={80}
             startAngle={90}
-            endAngle={360}
+            endAngle={90 + (userDatas.score / 100) * 360}
           >
             {[userDatas].map((entry, index) => (
               <Cell key={`cell-${index}`} fill="red" />

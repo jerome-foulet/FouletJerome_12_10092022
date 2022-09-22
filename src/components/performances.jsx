@@ -7,6 +7,7 @@ import {
 } from "recharts";
 
 function Performances({ performanceDatas }) {
+  performanceDatas.data.reverse();
   const { data, kind } = performanceDatas;
 
   const formatTick = (value) => {
