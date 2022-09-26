@@ -27,7 +27,7 @@ export default async function getDatas(userId, isMockedData) {
     )[0];
     console.log("Mocked");
   } else {
-    const userDatasUrl = `http://localhost:3000/user/${userId}`;
+    const userDatasUrl = process.env.REACT_APP_BACKEND_URL + `/user/${userId}`;
     const activityDatasUrl = `${userDatasUrl}/activity`;
     const averageSessionDatasUrl = `${userDatasUrl}/average-sessions`;
     const performanceDatasUrl = `${userDatasUrl}/performance`;
