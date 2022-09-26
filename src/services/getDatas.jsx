@@ -9,12 +9,19 @@ import { ActivityDatas } from "../models/ActivityDatas";
 import { AverageSessionDatas } from "../models/AverageSessionDatas";
 import { PerformanceDatas } from "../models/PerfomanceDatas";
 
+/**
+ *
+ * @param {number} userId The id of the user to get
+ * @param {boolean} isMockedData Define if we get data from mock or API
+ * @returns {Array} Array of formated data
+ */
 export default async function getDatas(userId, isMockedData) {
   let userDatas = {};
   let activityDatas = {};
   let performanceDatas = {};
   let averageSessionDatas = {};
   if (isMockedData) {
+    // USER_... are mocked data from BACKEND API so we have to filter them by the userId
     userDatas = USER_MAIN_DATA.filter((user) => user.id === userId)[0];
     activityDatas = USER_ACTIVITY.filter(
       (activity) => activity.userId === userId
@@ -27,10 +34,12 @@ export default async function getDatas(userId, isMockedData) {
     )[0];
     console.log("Mocked");
   } else {
+    // Define API URL
     const userDatasUrl = process.env.REACT_APP_BACKEND_URL + `/user/${userId}`;
     const activityDatasUrl = `${userDatasUrl}/activity`;
     const averageSessionDatasUrl = `${userDatasUrl}/average-sessions`;
     const performanceDatasUrl = `${userDatasUrl}/performance`;
+    // Fetch all URL
     const [
       userDatasToFetch,
       activityDatasToFetch,
@@ -42,6 +51,7 @@ export default async function getDatas(userId, isMockedData) {
       fetch(averageSessionDatasUrl),
       fetch(performanceDatasUrl),
     ]);
+    // Json() all fetched URL
     const [
       userDatasJson,
       activityDatasJson,
@@ -59,6 +69,7 @@ export default async function getDatas(userId, isMockedData) {
     performanceDatas = performanceDatasJson.data;
     console.log("API");
   }
+  // Use data modeling class
   return [
     new UserDatas(userDatas).format(),
     new ActivityDatas(activityDatas).format(),

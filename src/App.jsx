@@ -16,18 +16,17 @@ import DailyActivity from "./components/dailyActivity";
 import AverageSessionDuration from "./components/averageSessionDuration";
 import Performances from "./components/performances";
 import Score from "./components/score";
-import CardUserData from "./components/cardUserData";
+import CardNutrition from "./components/cardNutrition";
 
 function App() {
   // Use useSearchParams hook to get query parameters
   const [searchParams] = useSearchParams();
   // Get userId from query parameters and set it to 12 by default if not specified.
   const [userId] = useState(parseInt(searchParams.get("userId") ?? "12"));
-  // Get isMockedData from query parameters and set it to true by default - Only use true or false in query.
+  // Get isMockedData from query parameters and set it to true by default if not specified - Only use true or false in query.
   const [isMockedData] = useState(
     !(searchParams.get("isMockedData") === "false")
   );
-  //console.log(typeof isMockedData);
   console.log("userId: %s", userId);
   console.log("isMockedData: %s", isMockedData.toString());
 
@@ -60,11 +59,14 @@ function App() {
     get();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  /* console.log(userDatas);
+  /*
+  console.log(userDatas);
   console.log(activityDatas);
   console.log(averageSessionDatas);
-  console.log(performanceDatas); */
+  console.log(performanceDatas);
+  */
 
+  // Get user firstName from data or return empty string
   const firstName = userDatas.userInfos ? userDatas.userInfos.firstName : "";
 
   return (
@@ -107,30 +109,26 @@ function App() {
                   <Score userDatas={userDatas} />
                 </div>
                 <aside className="statsRightColumn">
-                  <CardUserData
+                  <CardNutrition
                     type="calories"
                     quantity={userDatas.keyData.calorieCount}
-                  >
-                    {caloriesIcon}
-                  </CardUserData>
-                  <CardUserData
+                    icon={caloriesIcon}
+                  />
+                  <CardNutrition
                     type="proteines"
                     quantity={userDatas.keyData.carbohydrateCount}
-                  >
-                    {proteinesIcon}
-                  </CardUserData>
-                  <CardUserData
+                    icon={proteinesIcon}
+                  />
+                  <CardNutrition
                     type="glucides"
                     quantity={userDatas.keyData.calorieCount}
-                  >
-                    {glucidesIcon}
-                  </CardUserData>
-                  <CardUserData
+                    icon={glucidesIcon}
+                  />
+                  <CardNutrition
                     type="lipides"
                     quantity={userDatas.keyData.lipidCount}
-                  >
-                    {fatIcon}
-                  </CardUserData>
+                    icon={fatIcon}
+                  />
                 </aside>
               </div>
             </section>

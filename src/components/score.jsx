@@ -1,5 +1,12 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 
+/**
+ * React component for score.
+ *
+ * @param {Object} userDatas The object of datas
+ * @returns {ReactComponentElement} A react component
+ */
 function Score({ userDatas }) {
   //userDatas.score = 340;
   return (
@@ -35,5 +42,11 @@ function Score({ userDatas }) {
     </article>
   );
 }
+
+Score.prototype = {
+  userDatas: PropTypes.shape({
+    score: PropTypes.number,
+  }).isRequired,
+};
 
 export default Score;

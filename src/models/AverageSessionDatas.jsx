@@ -3,6 +3,9 @@ export class AverageSessionDatas {
     this.averageSessionDatas = averageSessionDatas;
   }
 
+  /**
+   * @returns The formated averageSessionDatas object
+   */
   format() {
     const { sessions } = this.averageSessionDatas;
     return { sessions };

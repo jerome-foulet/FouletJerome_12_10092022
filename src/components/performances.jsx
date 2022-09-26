@@ -5,11 +5,24 @@ import {
   ResponsiveContainer,
   Radar,
 } from "recharts";
+import PropTypes from "prop-types";
 
+/**
+ * React component for performances.
+ *
+ * @param {Object} performanceDatas The object of datas
+ * @returns {ReactComponentElement} A react component
+ */
 function Performances({ performanceDatas }) {
   performanceDatas.data.reverse();
   const { data, kind } = performanceDatas;
 
+  /**
+   * Function to format tick from index to translated kind
+   *
+   * @param {number} value
+   * @returns {string} The translated kind
+   */
   const formatTick = (value) => {
     const translate = {
       cardio: "Cardio",
@@ -49,5 +62,12 @@ function Performances({ performanceDatas }) {
     </article>
   );
 }
+
+Performances.prototype = {
+  performanceDatas: PropTypes.shape({
+    data: PropTypes.array,
+    kind: PropTypes.array,
+  }).isRequired,
+};
 
 export default Performances;

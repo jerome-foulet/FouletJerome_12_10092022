@@ -8,10 +8,24 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import PropTypes from "prop-types";
 
+/**
+ * React component for daily activity.
+ *
+ * @param {Object} activityDatas The object of datas
+ * @returns {ReactComponentElement} A react component
+ */
 function DailyActivity({ activityDatas }) {
   const { sessions } = activityDatas;
 
+  /**
+   * Function to custom tooltip display
+   *
+   * @param {boolean} active The state of the tooltip
+   * @param {payload} any Object with value of the tooltip
+   * @returns {DOMElement} The customized Tooltip
+   */
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -101,5 +115,11 @@ function DailyActivity({ activityDatas }) {
     </article>
   );
 }
+
+DailyActivity.prototype = {
+  activityDatas: PropTypes.shape({
+    sessions: PropTypes.array,
+  }).isRequired,
+};
 
 export default DailyActivity;
