@@ -9,6 +9,7 @@ import {
   Legend,
 } from "recharts";
 import PropTypes from "prop-types";
+import useWindowDimensions from "../hooks/useWindowDImensions";
 
 /**
  * React component for daily activity.
@@ -18,6 +19,7 @@ import PropTypes from "prop-types";
  */
 function DailyActivity({ activityDatas }) {
   const { sessions } = activityDatas;
+  const { width } = useWindowDimensions();
 
   /**
    * Function to custom tooltip display
@@ -36,6 +38,15 @@ function DailyActivity({ activityDatas }) {
       );
     }
     return null;
+  };
+
+  /**
+   * Calculate Xaxis padding
+   *
+   * @returns {number} Padding for Xaxis
+   */
+  const getXaxisPadding = () => {
+    return (-80 * width) / 1920;
   };
 
   return (
@@ -76,6 +87,8 @@ function DailyActivity({ activityDatas }) {
             dy={15}
             tick={{ fill: "#9B9EAC", fontSize: 14 }}
             stroke={"#DEDEDE"}
+            //padding={{ left: -80, right: -80 }}
+            padding={{ left: getXaxisPadding(), right: getXaxisPadding() }}
           />
           <YAxis
             yAxisId="kilogram"
