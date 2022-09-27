@@ -46,7 +46,8 @@ function DailyActivity({ activityDatas }) {
    * @returns {number} Padding for Xaxis
    */
   const getXaxisPadding = () => {
-    return (-80 * width) / 1920;
+    if (width < 1200) return -24;
+    return -80;
   };
 
   return (
@@ -87,7 +88,6 @@ function DailyActivity({ activityDatas }) {
             dy={15}
             tick={{ fill: "#9B9EAC", fontSize: 14 }}
             stroke={"#DEDEDE"}
-            //padding={{ left: -80, right: -80 }}
             padding={{ left: getXaxisPadding(), right: getXaxisPadding() }}
           />
           <YAxis
@@ -131,7 +131,13 @@ function DailyActivity({ activityDatas }) {
 
 DailyActivity.prototype = {
   activityDatas: PropTypes.shape({
-    sessions: PropTypes.array,
+    sessions: PropTypes.arrayOf(
+      PropTypes.shape({
+        day: PropTypes.number.isRequired,
+        kilogram: PropTypes.number.isRequired,
+        calories: PropTypes.number.isRequired,
+      })
+    ),
   }).isRequired,
 };
 

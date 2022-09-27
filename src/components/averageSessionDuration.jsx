@@ -7,6 +7,7 @@ import {
   YAxis,
 } from "recharts";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 /**
  * React component for average session duration.
@@ -16,6 +17,7 @@ import PropTypes from "prop-types";
  */
 function AverageSessionDuration({ averageSessionDatas }) {
   const { sessions } = averageSessionDatas;
+  const [tooltipX, setTooltipX] = useState(0);
 
   // Set 2 values at the ends for line continuity
   let sessionsToDisplay = [
@@ -51,26 +53,56 @@ function AverageSessionDuration({ averageSessionDatas }) {
    * @param {payload} any Object with value of the tooltip
    * @returns The customized Tooltip
    */
-  const CustomTooltip = ({ active, payload }) => {
+  const CustomTooltip = ({ active, payload, coordinate }) => {
     if (active && payload && payload.length) {
       if (payload[0].payload.tickDisplay === false) return null;
+      // Hack to avoid warning update component while rendering another
+      // by send it back to the callback queue
+      setTimeout(() => setTooltipX(coordinate.x), 0);
       return <div className="customTooltip">{`${payload[0].value} min`}</div>;
     }
     return null;
   };
 
+  /**
+   * Function to draw or delete overlay with tooltip
+   *
+   * @param {Object} state Object onMouse
+   */
+  const drawOverlay = (state) => {
+    if (state.isTooltipActive) {
+      const overlay = document.querySelector(".averageTimeSession__overlay");
+      const container = document.querySelector(".averageTimeSession");
+      const containerWidth = container.clientWidth;
+      const calculatedWidth = containerWidth - tooltipX;
+      overlay.style.width = calculatedWidth + "px";
+    } else {
+      deleteOverlay();
+    }
+  };
+
+  const deleteOverlay = () => {
+    const overlay = document.querySelector(".averageTimeSession__overlay");
+    overlay.style.width = "0px";
+  };
+
   return (
     <article className="statsCard averageTimeSession">
+      <div className="averageTimeSession__overlay"></div>
       <h2>Durée moyenne des sessions</h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={sessionsToDisplay}
           margin={{ left: -20, right: -20, top: 100, bottom: 15 }}
+          onMouseMove={drawOverlay}
+          onMouseLeave={deleteOverlay}
         >
           <Tooltip
             content={<CustomTooltip />}
             cursor={false}
             wrapperStyle={{ outline: "none" }}
+            animationDuration={0}
+            margin={{ right: -100 }}
           />
           <Line
             type="natural"
@@ -98,7 +130,12 @@ function AverageSessionDuration({ averageSessionDatas }) {
 
 AverageSessionDuration.prototype = {
   averageSessionDatas: PropTypes.shape({
-    sessions: PropTypes.array,
+    sessions: PropTypes.arrayOf(
+      PropTypes.shape({
+        day: PropTypes.number.isRequired,
+        sessionLength: PropTypes.number.isRequired,
+      })
+    ),
   }).isRequired,
 };
 

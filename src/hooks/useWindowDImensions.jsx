@@ -8,6 +8,11 @@ function getWindowDimensions() {
   };
 }
 
+/**
+ * Hook to acces windows dimensions
+ *
+ * @returns ReactHook
+ */
 export default function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()

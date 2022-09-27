@@ -235,6 +235,19 @@ main {
   flex-wrap: wrap;
 }
 
+.averageTimeSession {
+  overflow: hidden;
+}
+
+.averageTimeSession__overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 200px;
+  background-color: #000000;
+  opacity: 0.2;
+}
+
 .averageTimeSession h2 {
   position: absolute;
   top: 29px;
@@ -254,6 +267,8 @@ main {
   line-height: 24px;
   color: black;
   padding: 0 7px 0 7px;
+  position: relative;
+  margin-right: 10px;
 }
 
 .score h2 {
